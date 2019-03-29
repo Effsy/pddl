@@ -5,7 +5,7 @@
 (:types
    container location - structure
    pile shelf cart - container
-   charger pile shelf - location
+   pile shelf - location
    book - object
 )
 
@@ -18,8 +18,6 @@
    (time-to-move-between-locations ?from - location ?to - location)
    (time-to-move-book)
    (number-of-spaces-in-container ?container - container)
-   (battery-capacity ?cart - cart)
-   (max-battery-capacity)
 )
 
 (:durative-action move-book
@@ -44,27 +42,12 @@
    :condition (and
        (at start (is-adjacent ?from ?cart))
        (at start (is-adjacent ?cart ?from))
-       (at start (> (battery-capacity ?cart) 5))
    )
    :effect (and
        (at start (not(is-adjacent ?from ?cart)))
        (at start (not(is-adjacent ?cart ?from)))
        (at end (is-adjacent ?to ?cart))
        (at end (is-adjacent ?cart ?to))
-       (at end (decrease (battery-capacity ?cart) 5))
-   )
-)
-
-(:durative-action charge
-   :parameters (?charger - charger ?cart - cart)
-   :duration (= ?duration 20)
-   :condition (and
-       (at start (is-adjacent ?charger ?cart))
-       (at start (is-adjacent ?cart ?charger))
-       ;(at start (< (battery-capacity ?cart) 100)) 
-   )
-   :effect (and
-        (at end (increase (battery-capacity ?cart) 20))
    )
 )
 
