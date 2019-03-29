@@ -18,9 +18,8 @@
    (time-to-move-between-locations ?from - location ?to - location)
    (time-to-move-book)
    (number-of-spaces-in-container ?container - container)
-;    (battery-capacity ?cart - cart)
-;    (max-battery-capacity)
-;    (charge-time)
+   (battery-capacity ?cart - cart)
+   (max-battery-capacity)
 )
 
 (:durative-action move-book
@@ -45,14 +44,14 @@
    :condition (and
        (at start (is-adjacent ?from ?cart))
        (at start (is-adjacent ?cart ?from))
-       ;(at start (> (battery-capacity ?cart) (time-to-move-between-locations ?from ?to)))
+       (at start (> (battery-capacity ?cart) 0))
    )
    :effect (and
        (at start (not(is-adjacent ?from ?cart)))
        (at start (not(is-adjacent ?cart ?from)))
        (at end (is-adjacent ?to ?cart))
        (at end (is-adjacent ?cart ?to))
-       ;(at end (decrease (battery-capacity ?cart) (time-to-move-between-locations ?from ?to)))
+       ;(at end (decrease (battery-capacity ?cart) 1))
    )
 )
 
