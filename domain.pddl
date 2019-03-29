@@ -57,15 +57,14 @@
 
 (:durative-action charge
    :parameters (?charger - charger ?cart - cart)
-   :duration (= ?duration 1)
+   :duration (= ?duration 20)
    :condition (and
        (at start (is-adjacent ?charger ?cart))
        (at start (is-adjacent ?cart ?charger))
-       ;(at start (< (battery-capacity ?cart) 100))
-       
+       ;(at start (< (battery-capacity ?cart) 100)) 
    )
    :effect (and
-        (at end (increase (battery-capacity ?cart) 1))
+        (at end (increase (battery-capacity ?cart) 20))
    )
 )
 
