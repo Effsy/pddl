@@ -1,22 +1,26 @@
 (define (domain library)
 
-(:requirements :typing :durative-actions :fluents)
+(:requirements :typing :durative-actions :fluents :equality)
 
 (:types
-   container - property
+   container location - structure
    pile shelf cart - container
+   charger pile shelf - location
    book - object
 )
 
 (:predicates
    (book-in-container ?book - book ?container - container)
-   (is-adjacent ?container1 - container ?container2 - container)
+   (is-adjacent ?container1 - structure ?container2 - structure)
 )
 
 (:functions
-   (time-to-move-between-locations ?from - container ?to - container)
+   (time-to-move-between-locations ?from - location ?to - location)
    (time-to-move-book)
    (number-of-spaces-in-container ?container - container)
+;    (battery-capacity ?cart - cart)
+;    (max-battery-capacity)
+;    (charge-time)
 )
 
 (:durative-action move-book
@@ -36,18 +40,34 @@
 )
 
 (:durative-action move-cart-location
-   :parameters (?from - container ?to - container ?cart - cart)
+   :parameters (?from - location ?to - location ?cart - cart)
    :duration (= ?duration (time-to-move-between-locations ?from ?to))
    :condition (and
        (at start (is-adjacent ?from ?cart))
        (at start (is-adjacent ?cart ?from))
+       ;(at start (> (battery-capacity ?cart) (time-to-move-between-locations ?from ?to)))
    )
    :effect (and
        (at start (not(is-adjacent ?from ?cart)))
        (at start (not(is-adjacent ?cart ?from)))
        (at end (is-adjacent ?to ?cart))
        (at end (is-adjacent ?cart ?to))
+       ;(at end (decrease (battery-capacity ?cart) (time-to-move-between-locations ?from ?to)))
    )
 )
+
+; (:durative-action charge
+;    :parameters (?charger - charger ?cart - cart)
+;    :duration (= ?duration 1)
+;    :condition (and
+;        (at start (is-adjacent ?charger ?cart))
+;        (at start (is-adjacent ?cart ?charger))
+;        (at start (< (battery-capacity) (max-battery-capacity)))
+       
+;    )
+;    :effect (and
+;         (at end (increase (battery-capacity ?cart) 1))
+;    )
+; )
 
 )
