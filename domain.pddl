@@ -40,10 +40,13 @@
    :duration (= ?duration (time-to-move-between-locations ?from ?to))
    :condition (and
        (at start (is-adjacent ?from ?cart))
+       (at start (is-adjacent ?cart ?from))
    )
    :effect (and
        (at start (not(is-adjacent ?from ?cart)))
+       (at start (not(is-adjacent ?cart ?from)))
        (at end (is-adjacent ?to ?cart))
+       (at end (is-adjacent ?cart ?to))
    )
 )
 
