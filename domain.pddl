@@ -4,7 +4,7 @@
 
 (:types
    container location - structure
-   pile shelf cart - container
+   pile shelf robot - container
    pile shelf - location
    book - object
 )
@@ -36,19 +36,17 @@
    )
 )
 
-(:durative-action move-cart-location
-   :parameters (?from - location ?to - location ?cart - cart)
+(:durative-action move-robot-location
+   :parameters (?from - location ?to - location ?robot - robot)
    :duration (= ?duration (time-to-move-between-locations ?from ?to))
    :condition (and
-       (at start (is-adjacent ?from ?cart))
-       (at start (is-adjacent ?cart ?from))
+       (at start (is-adjacent ?from ?robot))
+       (at start (is-adjacent ?robot ?from))
    )
    :effect (and
-       (at start (not(is-adjacent ?from ?cart)))
-       (at start (not(is-adjacent ?cart ?from)))
-       (at end (is-adjacent ?to ?cart))
-       (at end (is-adjacent ?cart ?to))
+       (at start (not(is-adjacent ?from ?robot)))
+       (at start (not(is-adjacent ?robot ?from)))
+       (at end (is-adjacent ?to ?robot))
+       (at end (is-adjacent ?robot ?to))
    )
-)
-
-)
+))
