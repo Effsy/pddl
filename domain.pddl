@@ -11,7 +11,6 @@
 (:predicates
    (book-in-container ?book - book ?container - container)
    (is-adjacent ?container1 - container ?container2 - container)
-   (book-target ?book - book ?shelf - container)
 )
 
 (:functions
