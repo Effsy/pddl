@@ -1,12 +1,12 @@
 (define (problem busy-day)
 ; Calm Day
-; One Worker
+; Two Worker
 ; Big Library
 
 (:domain library)
 (:objects
   shelf1 shelf2 shelf3 shelf4 shelf5 shelf6 shelf7 shelf8 - shelf
-  robot1 - robot
+  robot1 robot2 - robot
   pile1 - pile
   book1 book2 book3 book4 book5 book6 - book
 )
@@ -28,7 +28,8 @@
   (= (number-of-spaces-in-container shelf7) 10)
   (= (number-of-spaces-in-container shelf8) 10)
   
-  (= (number-of-spaces-in-container robot1) 10)
+  (= (number-of-spaces-in-container robot1) 5)
+  (= (number-of-spaces-in-container robot2) 5)
 
   ; pile1
   (= (time-to-move-between-locations pile1 shelf1) 5)
@@ -151,6 +152,8 @@
   (is-adjacent robot1 pile1)
   (is-adjacent pile1 robot1)
 
+  (is-adjacent robot2 pile1)
+  (is-adjacent pile1 robot2)
 )
 
 (:goal (and
