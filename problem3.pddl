@@ -1,6 +1,6 @@
 (define (problem busy-day)
 ; Busy day
-; Many workers
+; Three robots
 ; Small Library
 
 (:domain library)
