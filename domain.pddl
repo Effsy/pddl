@@ -31,8 +31,8 @@
    :effect (and
        (at start (not(book-in-container ?book ?from)))
        (at start (increase(number-of-spaces-in-container ?from) 1))
-       (at end (book-in-container ?book ?to))
-       (at end (decrease(number-of-spaces-in-container ?to) 1))
+       (at start (book-in-container ?book ?to))
+       (at start (decrease(number-of-spaces-in-container ?to) 1))
    )
 )
 
