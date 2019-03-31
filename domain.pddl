@@ -4,8 +4,8 @@
 
 (:types
    container location - structure
-   pile shelf cart - container
-   charger pile shelf - location
+   pile shelf robot - container
+   pile shelf - location
    book - object
 )
 
@@ -18,8 +18,6 @@
    (time-to-move-between-locations ?from - location ?to - location)
    (time-to-move-book)
    (number-of-spaces-in-container ?container - container)
-   (battery-capacity ?cart - cart)
-   (max-battery-capacity)
 )
 
 (:durative-action move-book
@@ -33,39 +31,22 @@
    :effect (and
        (at start (not(book-in-container ?book ?from)))
        (at start (increase(number-of-spaces-in-container ?from) 1))
-       (at end (book-in-container ?book ?to))
-       (at end (decrease(number-of-spaces-in-container ?to) 1))
+       (at start (book-in-container ?book ?to))
+       (at start (decrease(number-of-spaces-in-container ?to) 1))
    )
 )
 
-(:durative-action move-cart-location
-   :parameters (?from - location ?to - location ?cart - cart)
+(:durative-action move-robot-location
+   :parameters (?from - location ?to - location ?robot - robot)
    :duration (= ?duration (time-to-move-between-locations ?from ?to))
    :condition (and
-       (at start (is-adjacent ?from ?cart))
-       (at start (is-adjacent ?cart ?from))
-       (at start (> (battery-capacity ?cart) 5))
+       (at start (is-adjacent ?from ?robot))
+       (at start (is-adjacent ?robot ?from))
    )
    :effect (and
-       (at start (not(is-adjacent ?from ?cart)))
-       (at start (not(is-adjacent ?cart ?from)))
-       (at end (is-adjacent ?to ?cart))
-       (at end (is-adjacent ?cart ?to))
-       (at end (decrease (battery-capacity ?cart) 5))
+       (at start (not(is-adjacent ?from ?robot)))
+       (at start (not(is-adjacent ?robot ?from)))
+       (at end (is-adjacent ?to ?robot))
+       (at end (is-adjacent ?robot ?to))
    )
-)
-
-(:durative-action charge
-   :parameters (?charger - charger ?cart - cart)
-   :duration (= ?duration 20)
-   :condition (and
-       (at start (is-adjacent ?charger ?cart))
-       (at start (is-adjacent ?cart ?charger))
-       ;(at start (< (battery-capacity ?cart) 100)) 
-   )
-   :effect (and
-        (at end (increase (battery-capacity ?cart) 20))
-   )
-)
-
-)
+))
