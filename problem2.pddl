@@ -1,4 +1,4 @@
-(define (problem busy-day)
+(define (problem calm-day)
 ; Calm Day
 ; Two Robots
 ; Big Library
@@ -163,5 +163,6 @@
    (book-in-container book4 shelf4)
    (book-in-container book5 shelf5)
    (book-in-container book6 shelf6)
-)))
+))
 
+(:metric minimize (total-time)))

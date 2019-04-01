@@ -109,5 +109,6 @@
    (book-in-container book18 shelf4)
    (book-in-container book19 shelf4)
    (book-in-container book20 shelf4)
-)))
+))
 
+(:metric minimize (total-time)))
